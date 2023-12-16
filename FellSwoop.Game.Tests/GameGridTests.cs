@@ -1,0 +1,106 @@
+using FluentAssertions;
+
+namespace FellSwoop.Game.Tests
+{
+    public class GameGridTests
+    {
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(100, 200)]
+        [InlineData(1000, 2000)]
+        public void Game_Dimensions_Are_Correct(int width, int height)
+        {
+            var game = new FellSwoopGame(width, height);
+
+            // Correct number cells
+            game.Width.Should().Be(width);
+
+            game.Height.Should().Be(height);
+        }
+
+        [Theory]
+        [InlineData(10, 20, 0, 0, 4)]
+        [InlineData(10, 20, 9, 19, 4)]
+        [InlineData(10, 20, 5, 0, 6)]
+        [InlineData(10, 20, 5, 19, 6)]
+        [InlineData(10, 20, 5, 5, 9)]
+        [InlineData(10, 20, 5, 10, 9)]
+        public void Neighbour_Count_Is_Correct(int width, int height, int x, int y, int expected)
+        {
+            var game = new FellSwoopGame(width, height);
+
+            var coordinates = new Coordinates(x, y);
+
+            game.GridNeighbours(coordinates)
+                .Should()
+                .HaveCount(expected);
+        }
+
+
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(100, 200)]
+        [InlineData(1000, 2000)]
+        public void Coordinate_Is_Inside_Grid(int width, int height)
+        {
+            var game = new FellSwoopGame(width, height);
+
+            for (var x = 0; x < game.Width; x++)
+            {
+                for (var y = 0; y < game.Height; y++)
+                {
+                    game.IsInsideGrid(new Coordinates(x, y)).Should().BeTrue();
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(100, 200)]
+        [InlineData(1000, 2000)]
+        public void Game_Array_Is_Generated_Correctly(int width, int height)
+        {
+            var game = new FellSwoopGame(width, height);
+
+            // Correct number cells
+            game
+                .Grid
+                .Length
+                .Should()
+                .Be(width * height);
+        }
+
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(100, 200)]
+        [InlineData(1000, 2000)]
+        public void Game_Array_Type_Distribution_Is_Adequate(int width, int height)
+        {
+            var game = new FellSwoopGame(width, height);
+
+            var typeCounts = Flatten(game.Grid)
+                .GroupBy(x => x)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            // All types are in grid
+            typeCounts
+                .Values
+                .Should()
+                .HaveCount(Enum.GetValues(typeof(FellSwoopGame.CellType)).Length - 1);
+
+            // Grid cells more than a quarter for each of the three types
+            typeCounts
+                .Values
+                .All(x => x / Convert.ToDouble(width * height) >= 0.25)
+                .Should()
+                .BeTrue();
+        }
+
+        private IEnumerable<T> Flatten<T>(T[,] map)
+        {
+            for (var row = 0; row < map.GetLength(0); row++)
+            for (var col = 0; col < map.GetLength(1); col++)
+                yield return map[row, col];
+        }
+    }
+}

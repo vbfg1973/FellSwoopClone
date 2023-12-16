@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FellSwoop", "FellSwoop\FellSwoop.csproj", "{E733D4A3-97F4-46F5-AE71-9E9A10A1FAEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FellSwoop.Game", "FellSwoop.Game\FellSwoop.Game.csproj", "{05CD39E0-A874-4B19-AE5A-E0186D1F3FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FellSwoop.Game.Tests", "FellSwoop.Game.Tests\FellSwoop.Game.Tests.csproj", "{6F5CB2A9-A089-4898-A21A-1F993B54E4CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fellswoop.Monogame", "Fellswoop.Monogame\Fellswoop.Monogame.csproj", "{2DEAE481-4920-41E9-B74E-BCC204B2FA8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E733D4A3-97F4-46F5-AE71-9E9A10A1FAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E733D4A3-97F4-46F5-AE71-9E9A10A1FAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E733D4A3-97F4-46F5-AE71-9E9A10A1FAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E733D4A3-97F4-46F5-AE71-9E9A10A1FAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05CD39E0-A874-4B19-AE5A-E0186D1F3FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05CD39E0-A874-4B19-AE5A-E0186D1F3FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05CD39E0-A874-4B19-AE5A-E0186D1F3FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05CD39E0-A874-4B19-AE5A-E0186D1F3FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5CB2A9-A089-4898-A21A-1F993B54E4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5CB2A9-A089-4898-A21A-1F993B54E4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5CB2A9-A089-4898-A21A-1F993B54E4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5CB2A9-A089-4898-A21A-1F993B54E4CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DEAE481-4920-41E9-B74E-BCC204B2FA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DEAE481-4920-41E9-B74E-BCC204B2FA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DEAE481-4920-41E9-B74E-BCC204B2FA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DEAE481-4920-41E9-B74E-BCC204B2FA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
