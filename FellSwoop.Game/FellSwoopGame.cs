@@ -29,13 +29,15 @@
             Width = width;
             Height = height;
 
-            Grid = GenerateGrid();
+            Grid = new CellType[Width, Height];
+
+            PopulateGrid();
         }
 
-        public int Width { get; }
-        public int Height { get; }
+        public int Width { get; init; }
+        public int Height { get; init; }
 
-        public CellType[,] Grid { get; }
+        public CellType[,] Grid { get; init; }
 
         public IEnumerable<Coordinates> ConnectedCellsOfSameTypeAs(Coordinates coordinatesToInvestigate)
         {
@@ -63,6 +65,11 @@
             }
         }
 
+        public void SetGrid(int x, int y, CellType setTo)
+        {
+            Grid[x, y] = setTo;
+        }
+        
         public IEnumerable<Coordinates> GridNeighbours(Coordinates coordinates)
         {
             for (var x = -1; x <= 1; x++)
@@ -84,17 +91,14 @@
             return coordinates.X >= 0 && coordinates.X < Width && coordinates.Y >= 0 && coordinates.Y < Height;
         }
 
-        private CellType[,] GenerateGrid()
+        private void PopulateGrid()
         {
             var rand = new Random();
             var max = Enum.GetValues(typeof(CellType)).Length;
-            var grid = new CellType[Width, Height];
 
             for (var x = 0; x < Width; x++)
             for (var y = 0; y < Height; y++)
-                grid[x, y] = (CellType)rand.Next(1, max);
-
-            return grid;
+                SetGrid(x, y, (CellType)rand.Next(1, max));
         }
     }
 }

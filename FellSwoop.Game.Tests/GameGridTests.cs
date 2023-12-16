@@ -62,6 +62,39 @@ namespace FellSwoop.Game.Tests
                 }
             }
         }
+        
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(100, 200)]
+        [InlineData(1000, 2000)]
+        public void Grid_Full_Connected_Neighbour_Sweep(int width, int height)
+        {
+            var game = new FellSwoopGame(width, height);
+            var type = FellSwoopGame.CellType.Blue;
+            var otherType = FellSwoopGame.CellType.Red;
+            
+            for (var x = 0; x < game.Width; x++)
+            {
+                for (var y = 0; y < game.Height; y++)
+                {
+                    game.SetGrid(x, y, type);
+                }
+            }
+
+            var coords = new Coordinates(5, 5);
+            
+            game
+                .ConnectedCellsOfSameTypeAs(coords)
+                .Should()
+                .HaveCount(width * height);
+            
+            game.SetGrid(coords.X, coords.Y, otherType);
+            
+            game
+                .ConnectedCellsOfSameTypeAs(coords)
+                .Should()
+                .HaveCount(1);
+        }
 
         [Theory]
         [InlineData(10, 20)]
