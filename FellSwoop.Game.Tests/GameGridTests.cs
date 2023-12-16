@@ -84,14 +84,14 @@ namespace FellSwoop.Game.Tests
             var coords = new Coordinates(5, 5);
             
             game
-                .ConnectedCellsOfSameTypeAs(coords)
+                .ConnectedNeighboursOfSameTypeAs(coords)
                 .Should()
                 .HaveCount(width * height);
             
             game.SetGrid(coords.X, coords.Y, otherType);
             
             game
-                .ConnectedCellsOfSameTypeAs(coords)
+                .ConnectedNeighboursOfSameTypeAs(coords)
                 .Should()
                 .HaveCount(1);
         }

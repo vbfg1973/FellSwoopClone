@@ -10,7 +10,7 @@
         int Height { get; }
         FellSwoopGame.CellType[,] Grid { get; }
         bool IsInsideGrid(Coordinates coordinates);
-        IEnumerable<Coordinates> ConnectedCellsOfSameTypeAs(Coordinates coordinatesToInvestigate);
+        IEnumerable<Coordinates> ConnectedNeighboursOfSameTypeAs(Coordinates coordinatesToInvestigate);
         IEnumerable<Coordinates> GridNeighbours(Coordinates coordinates);
     }
 
@@ -39,7 +39,7 @@
 
         public CellType[,] Grid { get; init; }
 
-        public IEnumerable<Coordinates> ConnectedCellsOfSameTypeAs(Coordinates coordinatesToInvestigate)
+        public IEnumerable<Coordinates> ConnectedNeighboursOfSameTypeAs(Coordinates coordinatesToInvestigate)
         {
             var seen = new HashSet<Coordinates>();
             var queue = new Queue<Coordinates>();
