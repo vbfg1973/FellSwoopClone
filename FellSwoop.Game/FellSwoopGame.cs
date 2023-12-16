@@ -57,10 +57,10 @@
 
                 yield return current;
 
-                foreach (var neighbour in GridNeighbours(current).Where(n => !seen.Contains(n)))
+                foreach (var validNeighbour in GridNeighbours(current).Where(neighbour => !seen.Contains(neighbour)))
                 {
-                    queue.Enqueue(neighbour);
-                    seen.Add(neighbour);
+                    queue.Enqueue(validNeighbour);
+                    seen.Add(validNeighbour);
                 }
             }
         }
