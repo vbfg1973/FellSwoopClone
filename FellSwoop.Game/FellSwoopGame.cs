@@ -4,14 +4,17 @@
     {
     }
 
+
     public interface IFellSwoopGame
     {
-        int Width { get; }
-        int Height { get; }
-        FellSwoopGame.CellType[,] Grid { get; }
-        bool IsInsideGrid(Coordinates coordinates);
+        int Width { get; init; }
+        int Height { get; init; }
+        FellSwoopGame.CellType[,] Grid { get; init; }
         IEnumerable<Coordinates> ConnectedNeighboursOfSameTypeAs(Coordinates coordinatesToInvestigate);
         IEnumerable<Coordinates> GridNeighbours(Coordinates coordinates);
+        bool IsInsideGrid(Coordinates coordinates);
+        void SetGrid(int x, int y, FellSwoopGame.CellType setTo);
+        void LoadFile(string path);
     }
 
     public class FellSwoopGame : IFellSwoopGame
