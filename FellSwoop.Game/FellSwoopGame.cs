@@ -55,11 +55,13 @@
             while (queue.Count > 0)
             {
                 var currentInvestigation = queue.Dequeue();
-                if (CellTypeAtCoordinates(currentInvestigation) != CellTypeAtCoordinates(coordinatesToInvestigate)) continue;
+                if (CellTypeAtCoordinates(currentInvestigation) !=
+                    CellTypeAtCoordinates(coordinatesToInvestigate)) continue;
 
                 yield return currentInvestigation;
 
-                foreach (var neighbourToInvestigate in GridNeighbours(currentInvestigation).Where(neighbour => !seen.Contains(neighbour)))
+                foreach (var neighbourToInvestigate in GridNeighbours(currentInvestigation)
+                             .Where(neighbour => !seen.Contains(neighbour)))
                 {
                     queue.Enqueue(neighbourToInvestigate);
                     seen.Add(neighbourToInvestigate);
@@ -67,11 +69,6 @@
             }
         }
 
-        public void SetGrid(int x, int y, CellType setTo)
-        {
-            Grid[x, y] = setTo;
-        }
-        
         public IEnumerable<Coordinates> GridNeighbours(Coordinates coordinates)
         {
             for (var x = -1; x <= 1; x++)
@@ -83,14 +80,54 @@
             }
         }
 
-        private CellType CellTypeAtCoordinates(Coordinates coordinates)
-        {
-            return Grid[coordinates.X, coordinates.Y];
-        }
-
         public bool IsInsideGrid(Coordinates coordinates)
         {
             return coordinates.X >= 0 && coordinates.X < Width && coordinates.Y >= 0 && coordinates.Y < Height;
+        }
+
+        public void SetGrid(int x, int y, CellType setTo)
+        {
+            Grid[x, y] = setTo;
+        }
+
+        public void LoadFile(string path)
+        {
+            var lines = File.ReadAllLines(path).Select(x => x.Trim()).Reverse().ToArray();
+            var hash = new HashSet<int>(lines.Select(x => x.Length));
+            if (hash.Count > 1)
+                throw new ArgumentException($"{path} has uneven lines - {string.Join(",", hash.Order())}");
+
+            for (var x = 0; x < lines[0].Length; x++)
+            {
+                for (var y = 0; y < lines.Length; y++)
+                {
+                    ParseFilePositionAndSet(x, y, lines[y][x]);
+                }
+            }
+        }
+
+        private void ParseFilePositionAndSet(int x, int y, char c)
+        {
+            switch (c)
+            {
+                case 'R':
+                    SetGrid(x, y, CellType.Red);
+                    break;
+                case 'G':
+                    SetGrid(x, y, CellType.Green);
+                    break;
+                case 'B':
+                    SetGrid(x, y, CellType.Blue);
+                    break;
+                default:
+                    SetGrid(x, y, CellType.None);
+                    break;
+            }
+        }
+
+        private CellType CellTypeAtCoordinates(Coordinates coordinates)
+        {
+            return Grid[coordinates.X, coordinates.Y];
         }
 
         private void PopulateGrid()

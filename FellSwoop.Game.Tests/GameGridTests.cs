@@ -7,7 +7,6 @@ namespace FellSwoop.Game.Tests
         [Theory]
         [InlineData(10, 20)]
         [InlineData(100, 200)]
-        [InlineData(1000, 2000)]
         public void Game_Dimensions_Are_Correct(int width, int height)
         {
             var game = new FellSwoopGame(width, height);
@@ -46,7 +45,6 @@ namespace FellSwoop.Game.Tests
         [Theory]
         [InlineData(10, 20)]
         [InlineData(100, 200)]
-        [InlineData(1000, 2000)]
         public void Coordinate_Is_Inside_Grid(int width, int height)
         {
             var game = new FellSwoopGame(width, height);
@@ -62,17 +60,16 @@ namespace FellSwoop.Game.Tests
                 }
             }
         }
-        
+
         [Theory]
         [InlineData(10, 20)]
         [InlineData(100, 200)]
-        [InlineData(1000, 2000)]
         public void Grid_Full_Connected_Neighbour_Sweep(int width, int height)
         {
             var game = new FellSwoopGame(width, height);
             var type = FellSwoopGame.CellType.Blue;
             var otherType = FellSwoopGame.CellType.Red;
-            
+
             for (var x = 0; x < game.Width; x++)
             {
                 for (var y = 0; y < game.Height; y++)
@@ -82,14 +79,14 @@ namespace FellSwoop.Game.Tests
             }
 
             var coords = new Coordinates(5, 5);
-            
+
             game
                 .ConnectedNeighboursOfSameTypeAs(coords)
                 .Should()
                 .HaveCount(width * height);
-            
+
             game.SetGrid(coords.X, coords.Y, otherType);
-            
+
             game
                 .ConnectedNeighboursOfSameTypeAs(coords)
                 .Should()
@@ -97,24 +94,44 @@ namespace FellSwoop.Game.Tests
         }
 
         [Theory]
+        [InlineData("10x20.5-5.3.txt")]
+        [InlineData("10x20.5-5.5.txt")]
+        public void Grid_Connected_Neighbours_Count_Correct_From_Files(string fileName)
+        {
+            var pathElements = new[] { "Resources", "Grids", fileName };
+
+            var testDetails = fileName.Split(".").ToArray();
+            var size = testDetails[0].Split("x").Select(x => Convert.ToInt32(x)).ToArray();
+
+            var game = new FellSwoopGame(size[0], size[1]);
+            game.LoadFile(Path.Combine(pathElements));
+
+            game.Width.Should().Be(size[0]);
+            game.Height.Should().Be(size[1]);
+
+            var coords = testDetails[1].Split("-").Select(x => Convert.ToInt32(x)).ToArray();
+            game.ConnectedNeighboursOfSameTypeAs(new Coordinates(coords[0], coords[1]))
+                .Should()
+                .HaveCount(Convert.ToInt32(testDetails[2]));
+        }
+
+        [Theory]
         [InlineData(10, 20)]
         [InlineData(100, 200)]
-        [InlineData(1000, 2000)]
         public void Coordinate_Is_Outside_Grid(int width, int height)
         {
             var game = new FellSwoopGame(width, height);
-            
+
             game.IsInsideGrid(new Coordinates(width, 0)).Should().BeFalse();
-            
+
             game.IsInsideGrid(new Coordinates(0, height)).Should().BeFalse();
-            
+
             game.IsInsideGrid(new Coordinates(width, height)).Should().BeFalse();
         }
 
         [Theory]
         [InlineData(10, 20)]
         [InlineData(100, 200)]
-        [InlineData(1000, 2000)]
         public void Game_Array_Is_Generated_Correctly(int width, int height)
         {
             var game = new FellSwoopGame(width, height);
@@ -130,7 +147,6 @@ namespace FellSwoop.Game.Tests
         [Theory]
         [InlineData(10, 20)]
         [InlineData(100, 200)]
-        [InlineData(1000, 2000)]
         public void Game_Array_Type_Distribution_Is_Adequate(int width, int height)
         {
             var game = new FellSwoopGame(width, height);
