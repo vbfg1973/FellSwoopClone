@@ -13,9 +13,15 @@ namespace FellSwoop.Game.Tests
             var game = new FellSwoopGame(width, height);
 
             // Correct number cells
-            game.Width.Should().Be(width);
+            game
+                .Width
+                .Should()
+                .Be(width);
 
-            game.Height.Should().Be(height);
+            game
+                .Height
+                .Should()
+                .Be(height);
         }
 
         [Theory]
@@ -49,9 +55,27 @@ namespace FellSwoop.Game.Tests
             {
                 for (var y = 0; y < game.Height; y++)
                 {
-                    game.IsInsideGrid(new Coordinates(x, y)).Should().BeTrue();
+                    game
+                        .IsInsideGrid(new Coordinates(x, y))
+                        .Should()
+                        .BeTrue();
                 }
             }
+        }
+
+        [Theory]
+        [InlineData(10, 20)]
+        [InlineData(100, 200)]
+        [InlineData(1000, 2000)]
+        public void Coordinate_Is_Outside_Grid(int width, int height)
+        {
+            var game = new FellSwoopGame(width, height);
+            
+            game.IsInsideGrid(new Coordinates(width, 0)).Should().BeFalse();
+            
+            game.IsInsideGrid(new Coordinates(0, height)).Should().BeFalse();
+            
+            game.IsInsideGrid(new Coordinates(width, height)).Should().BeFalse();
         }
 
         [Theory]
