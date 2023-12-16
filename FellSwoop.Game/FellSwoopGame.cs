@@ -44,23 +44,25 @@
             var seen = new HashSet<Coordinates>();
             var queue = new Queue<Coordinates>();
 
+            // Add immediate neighbours to queue
             foreach (var neighbour in GridNeighbours(coordinatesToInvestigate))
             {
                 seen.Add(neighbour);
                 queue.Enqueue(neighbour);
             }
 
+            // If next item on queue matches start point yield value and add its neighbours to queue 
             while (queue.Count > 0)
             {
-                var current = queue.Dequeue();
-                if (CellTypeAtCoordinates(current) != CellTypeAtCoordinates(coordinatesToInvestigate)) continue;
+                var currentInvestigation = queue.Dequeue();
+                if (CellTypeAtCoordinates(currentInvestigation) != CellTypeAtCoordinates(coordinatesToInvestigate)) continue;
 
-                yield return current;
+                yield return currentInvestigation;
 
-                foreach (var validNeighbour in GridNeighbours(current).Where(neighbour => !seen.Contains(neighbour)))
+                foreach (var neighbourToInvestigate in GridNeighbours(currentInvestigation).Where(neighbour => !seen.Contains(neighbour)))
                 {
-                    queue.Enqueue(validNeighbour);
-                    seen.Add(validNeighbour);
+                    queue.Enqueue(neighbourToInvestigate);
+                    seen.Add(neighbourToInvestigate);
                 }
             }
         }
