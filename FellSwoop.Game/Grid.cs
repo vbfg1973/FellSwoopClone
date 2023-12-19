@@ -1,21 +1,8 @@
-﻿namespace FellSwoop.Game
-{
-    public interface IGrid
-    {
-        int Height { get; }
-        int Width { get; }
-        int Count { get; }
-        public IEnumerable<CellType> Values { get; }
-        void SetTo(int x, int y, CellType cellType);
-        CellType AtPosition(int x, int y);
-        CellType AtPosition(Coordinates coordinates);
-        IEnumerable<Coordinates> PopulatedInColumn(int x);
-        IEnumerable<Coordinates> PopulatedInColumnAbove(Coordinates c);
-        IEnumerable<Coordinates> Neighbours(Coordinates coordinates);
-        bool IsInsideGrid(Coordinates coordinates);
-        void LoadFile(string path);
-    }
+﻿using FellSwoop.Game.Abstract;
+using FellSwoop.Game.Models;
 
+namespace FellSwoop.Game
+{
     public class Grid : IGrid
     {
         private readonly CellType[,] _cells;
@@ -73,6 +60,29 @@
 
                 if (IsInsideGrid(neighbour)) yield return neighbour;
             }
+        }
+        
+        public IEnumerable<Coordinates> GetWholeColumn(Coordinates coordinates)
+        {
+            for (var y = 0; y < Height; y++)
+            {
+                var coord = new Coordinates(coordinates.X, y);
+                
+                if (IsInsideGrid(coord) && AtPosition(coord) != CellType.None)
+                {
+                    yield return coord;
+                }
+            }
+        }
+
+        public static bool IsAbove(Coordinates coordinates, Coordinates reference)
+        {
+            return coordinates.X == reference.X && coordinates.Y > reference.Y;
+        }
+
+        public bool IsPopulated(Coordinates coordinates)
+        {
+            return AtPosition(coordinates) != CellType.None;
         }
 
         public bool IsInsideGrid(Coordinates coordinates)
