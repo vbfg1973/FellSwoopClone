@@ -24,16 +24,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FellSwoop.Game\FellSwoop.Game.csproj" />
+        <ProjectReference Include="..\FellSwoop.Game\FellSwoop.Game.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Resources\Grids\10x20.5-5.3.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\Grids\10x20.5-5.5.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="Resources\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>
