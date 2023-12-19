@@ -1,11 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FellSwoop.Game;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace FellSwoop
 {
-    public class Game1 : Game
+    public class Game1 : Microsoft.Xna.Framework.Game
     {
+        private FellSwoopGame _game;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -14,11 +16,18 @@ namespace FellSwoop
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            Width = 40;
+            Height = 40;
         }
+
+        public int Width { get; }
+        public int Height { get; }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _game = new FellSwoopGame(Width, Height);
 
             base.Initialize();
         }
