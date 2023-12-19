@@ -1,3 +1,4 @@
+using FellSwoop.Game.Models;
 using FluentAssertions;
 
 namespace FellSwoop.Game.Tests

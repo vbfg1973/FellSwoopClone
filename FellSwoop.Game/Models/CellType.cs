@@ -1,4 +1,4 @@
-﻿namespace FellSwoop.Game
+﻿namespace FellSwoop.Game.Models
 {
     public enum CellType
     {
