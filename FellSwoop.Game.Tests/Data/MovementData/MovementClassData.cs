@@ -19,7 +19,7 @@ namespace FellSwoop.Game.Tests.Data.MovementData
                     )
                 }
             };
-            
+
             yield return new object[]
             {
                 "10x20.4-15.6.txt",
@@ -30,28 +30,31 @@ namespace FellSwoop.Game.Tests.Data.MovementData
                         new Coordinates(4, 16),
                         new Coordinates(4, 14)
                     ),
-                    
+
                     new ChangingCoordinates
                     (
                         new Coordinates(4, 19),
                         new Coordinates(4, 15)
                     ),
-                    
+
                     new ChangingCoordinates
                     (
                         new Coordinates(5, 19),
                         new Coordinates(5, 16)
                     ),
-                    
+
                     new ChangingCoordinates
                     (
                         new Coordinates(5, 18),
                         new Coordinates(5, 15)
-                    ),
+                    )
                 }
             };
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

@@ -61,29 +61,6 @@ namespace FellSwoop.Game
                 if (IsInsideGrid(neighbour)) yield return neighbour;
             }
         }
-        
-        public IEnumerable<Coordinates> GetWholeColumn(Coordinates coordinates)
-        {
-            for (var y = 0; y < Height; y++)
-            {
-                var coord = new Coordinates(coordinates.X, y);
-                
-                if (IsInsideGrid(coord) && AtPosition(coord) != CellType.None)
-                {
-                    yield return coord;
-                }
-            }
-        }
-
-        public static bool IsAbove(Coordinates coordinates, Coordinates reference)
-        {
-            return coordinates.X == reference.X && coordinates.Y > reference.Y;
-        }
-
-        public bool IsPopulated(Coordinates coordinates)
-        {
-            return AtPosition(coordinates) != CellType.None;
-        }
 
         public bool IsInsideGrid(Coordinates coordinates)
         {
@@ -107,6 +84,26 @@ namespace FellSwoop.Game
             for (var x = 0; x < lines[0].Length; x++)
             for (var y = 0; y < lines.Length; y++)
                 ParseFilePositionAndSet(x, y, lines[y][x]);
+        }
+
+        public IEnumerable<Coordinates> GetWholeColumn(Coordinates coordinates)
+        {
+            for (var y = 0; y < Height; y++)
+            {
+                var coord = new Coordinates(coordinates.X, y);
+
+                if (IsInsideGrid(coord) && AtPosition(coord) != CellType.None) yield return coord;
+            }
+        }
+
+        public static bool IsAbove(Coordinates coordinates, Coordinates reference)
+        {
+            return coordinates.X == reference.X && coordinates.Y > reference.Y;
+        }
+
+        public bool IsPopulated(Coordinates coordinates)
+        {
+            return AtPosition(coordinates) != CellType.None;
         }
 
         private IEnumerable<CellType> GetCellValues()

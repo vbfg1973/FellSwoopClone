@@ -1,7 +1,8 @@
 ﻿using ReactiveUI;
 
-namespace FellSwoop.ViewModels;
-
-public class ViewModelBase : ReactiveObject
+namespace FellSwoop.ViewModels
 {
+    public class ViewModelBase : ReactiveObject
+    {
+    }
 }

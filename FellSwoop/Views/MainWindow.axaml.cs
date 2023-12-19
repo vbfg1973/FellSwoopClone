@@ -1,11 +1,12 @@
 using Avalonia.Controls;
 
-namespace FellSwoop.Views;
-
-public partial class MainWindow : Window
+namespace FellSwoop.Views
 {
-    public MainWindow()
+    public class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }

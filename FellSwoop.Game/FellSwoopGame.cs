@@ -1,5 +1,4 @@
-﻿using FellSwoop.Game.Abstract;
-using FellSwoop.Game.Models;
+﻿using FellSwoop.Game.Models;
 
 namespace FellSwoop.Game
 {

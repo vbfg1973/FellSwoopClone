@@ -14,10 +14,11 @@ namespace FellSwoop.Game.Tests
 
             coordCollection.Above(c).Should().HaveCount(expectedCount);
         }
-        
+
         [Theory]
         [ClassData(typeof(CollectionIsBelowClassData))]
-        public void CountCollection_Below_Comparison_Point(Coordinates[] collection, Coordinates comparison, int expectedCount)
+        public void CountCollection_Below_Comparison_Point(Coordinates[] collection, Coordinates comparison,
+            int expectedCount)
         {
             var coordCollection = new CoordinateCollection(collection);
 

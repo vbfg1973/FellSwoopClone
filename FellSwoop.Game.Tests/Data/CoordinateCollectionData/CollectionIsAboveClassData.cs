@@ -13,7 +13,7 @@ namespace FellSwoop.Game.Tests.Data.CoordinateCollectionData
                 {
                     new Coordinates(1, 1),
                     new Coordinates(1, 2),
-                    new Coordinates(1, 3),
+                    new Coordinates(1, 3)
                 },
                 new Coordinates(1, 4),
                 0
@@ -25,7 +25,7 @@ namespace FellSwoop.Game.Tests.Data.CoordinateCollectionData
                 {
                     new Coordinates(1, 2),
                     new Coordinates(1, 3),
-                    new Coordinates(1, 4),
+                    new Coordinates(1, 4)
                 },
                 new Coordinates(1, 1),
                 3
@@ -41,13 +41,16 @@ namespace FellSwoop.Game.Tests.Data.CoordinateCollectionData
                     new Coordinates(1, 4),
                     new Coordinates(1, 5),
                     new Coordinates(1, 6),
-                    new Coordinates(1, 7),
+                    new Coordinates(1, 7)
                 },
                 new Coordinates(1, 3),
                 4
             };
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
